@@ -27,7 +27,7 @@
 //Dynamic memory management
 #include <new> //	Low-level memory management utilities
 #include <memory> //	Higher level memory management utilities
-#include <scoped_allocator> // (since C++11)	Nested allocator class
+//#include <scoped_allocator> // (since C++11)	Nested allocator class
 //Numeric limits
 #include <climits> //	limits of integral types
 #include <cfloat> //	limits of float types
@@ -101,7 +101,7 @@
 #include <ciso646> //	empty header. The macros that appear in iso646.h in C are keywords in C++
 #include <ccomplex> // (since C++11)	simply includes the header #include <complex> //
 #include <ctgmath> // (since C++11)	simply includes the headers #include <ccomplex> // and #include <cmath> //: the overloads equivalent to the contents of the C header tgmath.h are already provided by #include <cmath> // and #include <complex> //
-#include <cstdalign> // (since C++11)	defines one compatibility macro constant
+//#include <cstdalign> // (since C++11)	defines one compatibility macro constant
 #include <cstdbool> // (since C++11)	defines one compatibility macro constant
 //Deprecated headers
 #include <assert.h> // (deprecated)	behaves as if each name from #include <cassert> // is placed in global namespace
@@ -117,7 +117,7 @@
 #include <math.h> // (deprecated)	behaves as if each name from #include <cmath> // is placed in global namespace
 #include <setjmp.h> // (deprecated)	behaves as if each name from #include <csetjmp> // is placed in global namespace
 #include <signal.h> // (deprecated)	behaves as if each name from #include <csignal> // is placed in global namespace
-#include <stdalign.h> // (deprecated)	behaves as if each name from #include <cstdalign> // is placed in global namespace
+//#include <stdalign.h> // (deprecated)	behaves as if each name from #include <cstdalign> // is placed in global namespace
 #include <stdarg.h> // (deprecated)	behaves as if each name from #include <cstdarg> // is placed in global namespace
 #include <stdbool.h> // (deprecated)	behaves as if each name from #include <cstdbool> // is placed in global namespace
 #include <stddef.h> // (deprecated)	behaves as if each name from #include <cstddef> // is placed in global namespace
@@ -127,7 +127,7 @@
 #include <string.h> // (deprecated)	behaves as if each name from #include <cstring> // is placed in global namespace
 #include <tgmath.h> // (deprecated)	behaves as if each name from #include <ctgmath> // is placed in global namespace
 #include <time.h> // (deprecated)	behaves as if each name from #include <ctime> // is placed in global namespace
-#include <uchar.h> // (deprecated)	behaves as if each name from #include <cuchar> // is placed in global namespace
+//#include <uchar.h> // (deprecated)	behaves as if each name from #include <cuchar> // is placed in global namespace
 #include <wchar.h> // (deprecated)	behaves as if each name from #include <cwchar> // is placed in global namespace
 #include <wctype.h> // (deprecated)	behaves as if each name from #include <cwctype> // is placed in global namespace
 
