@@ -48,8 +48,13 @@ void delayMicroseconds(int us){
 /////////////////////////////////////////////////////////////////////////////////
 
 //
-void digitalWrite(int,int){}
-void pinMode(int, int){}
+void digitalWrite(int,int){
+
+}
+
+void pinMode(int, int){
+
+}
 
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
@@ -101,39 +106,50 @@ void _Wire::beginTransmission(int _dev_address){
 	if (ioctl(this->fd,I2C_SLAVE,_dev_address) < 0) {
 		printf("Failed to acquire bus access and/or talk to slave.\n");
 	}
+        printf("wire.begintransmission addr=%x\r\n",_dev_address);
 }
 int _Wire::endTransmission(){
+        printf("wire.endtransmission\r\n");
 	return 0;
 }
 
 void _Wire::write(uint8_t value){
+        printf("wire.write=%x\r\n",value);
 	::write(this->fd,&value,1);
 }
 
+
 void _Wire::send(int value){
+        printf("wire.send -> write\r\n");
 	this->write(value);
 }
 
 uint8_t _Wire::read(){
-	uint8_t value;
-	::read(this->fd,&value,1);
-	return 0;
+        rx_count--;
+        uint8_t value = this->buffer[this->rx_idx++ ];
+        printf("wire.read value=%x\r\n",value);
+	return value;
 }
 
 int _Wire::receive(){
-	return this->buffer[this->rx_count--];
+        printf("wire.receive -> read\r\n");
+	return read();
 }
 
 void _Wire::requestFrom(int _dev_address,int _nbytes){
 	if (ioctl(this->fd,I2C_SLAVE,_dev_address) < 0) {
 		printf("Failed to acquire bus access and/or talk to slave.\n");
 	}
-	printf("wire.requestFrom addr=%d n=%d\r\n",_dev_address,_nbytes);
-	this->rx_count=::read(this->fd,this->buffer,sizeof(this->buffer));
+        this->rx_idx=0;
+	this->rx_count= ::read(this->fd, &this->buffer[0],sizeof(this->buffer));
+        rx_count=_nbytes;
+	printf("wire.requestFrom addr=0x%x bytes=%d rxed=%d\r\n",_dev_address,_nbytes,this->rx_count);
+
 }
 
 int _Wire::available(){
-	return this->rx_count;
+        printf("wire.available count=%d\r\n",rx_count);
+	return this->rx_count>0?1:0;
 }
 
 _Wire Wire;
@@ -141,14 +157,19 @@ _Wire Wire;
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
+_EEPROM::_EEPROM(){
+   //calibration signature
+   mem[0xa]=0x19;
+}
+
 int _EEPROM::read(int addr){
-	int value=1;
-	printf("eeprom read addr=%d value=%d\r\n",addr,value);
-	return 0;
+	printf("eeprom read addr=0x%x value=%d\r\n",addr,mem[addr]);
+	return mem[addr];
 }
 
 void _EEPROM::write(int addr,int value){
-	printf("eeprom write addr=%d value=%d\r\n",addr,value);
+        mem[addr]=value;
+	printf("eeprom write addr=0x%x value=%d\r\n",addr,mem[addr]);
 }
 
 _EEPROM EEPROM;

@@ -86,12 +86,15 @@ public:
 	int addr;
 	uint8_t buffer[64];
 	int rx_count;
+        int rx_idx;
 };
 
 extern _Wire Wire;
 
 class _EEPROM {
 public:
+    uint8_t mem[2048];
+    _EEPROM();
     int read(int);
     void write(int,int);
 };
