@@ -22,4 +22,21 @@ wget http://www.pyqtgraph.org/downloads/python-pyqtgraph_0.9.8-1_all.deb
 dpkg -i python-pyqtgraph_0.9.8-1_all.deb
 
 
+Processing demos - 3D Cube
+--------------------------
+
+Download processing 2.2.1 
+
+http://download.processing.org/processing-2.2.1-windows32.zip
+
+http://download.processing.org/processing-2.2.1-windows64.zip
+
+http://download.processing.org/processing-2.2.1-linux64.tgz
+
+http://download.processing.org/processing-2.2.1-linux32.tgz
+
+http://download.processing.org/processing-2.2.1-macosx.zip
+
+
+
 
