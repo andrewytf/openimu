@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'freeimu_cal.ui'
 #
-# Created: Mon Dec 17 17:22:26 2012
-#      by: PyQt4 UI code generator 4.9.6
+# Created: Tue Jul 29 00:54:00 2014
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -508,5 +508,5 @@ class Ui_FreeIMUCal(object):
         self.label_4.setText(_translate("FreeIMUCal", "To Be Implemented", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_9), _translate("FreeIMUCal", "Orientation Sensing Test", None))
 
-from pyqtgraph import PlotWidget
 from pyqtgraph.opengl import GLViewWidget
+from pyqtgraph import PlotWidget

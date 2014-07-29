@@ -50,7 +50,7 @@ void myDelay(int time) {
 void setup() 
 {
   size(VIEW_SIZE_X, VIEW_SIZE_Y, P3D);
-  myPort = new Serial(this, "/dev/ttyUSB9", 115200);  
+  myPort = new Serial(this, "/dev/ttyUSB0", 115200);  
   
   // The font must be located in the sketch's "data" directory to load successfully
   font = loadFont("CourierNew36.vlw"); 
