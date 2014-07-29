@@ -28,7 +28,7 @@ wget http://www.pyqtgraph.org/downloads/python-pyqtgraph_0.9.8-1_all.deb
 dpkg -i python-pyqtgraph_0.9.8-1_all.deb
 
 
-Processing demos - 3D Cube
+Debug with OpenGL 3D Cube
 --------------------------
 Required test and validation tool
 
