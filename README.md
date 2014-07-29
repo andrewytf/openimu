@@ -19,6 +19,7 @@ apt-get install -y arduino
 
 FreeIMU_GUI required packages (Ubuntu 14.04)
 --------------------------------------------
+Required calibration tool
 
 apt-get install -y python-qt4 python-qt4-gl python-opengl pyqt4-dev-tools python-scipy
 
@@ -29,6 +30,7 @@ dpkg -i python-pyqtgraph_0.9.8-1_all.deb
 
 Processing demos - 3D Cube
 --------------------------
+Required test and validation tool
 
 Download processing 2.2.1 
 
