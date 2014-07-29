@@ -11,6 +11,11 @@ The main application of FreeIMU is orientation sensing: by reading the data from
 As FreeIMU breakout the sensors interrupt pins, it's also possible to detect per axis single and double taps, free fall as well as activity or inactivity. This makes FreeIMU a very good choice for Human-Computer devices prototyping. Interrupts pins are also very useful if you are into interrupt based reading of the sensors, useful to develop high frequency interrupt based sensor reading.
 
 
+Arduino Firmware (version 1.0.x)
+--------------------------------
+
+apt-get install -y arduino
+
 
 FreeIMU_GUI required packages (Ubuntu 14.04)
 --------------------------------------------
@@ -36,6 +41,12 @@ http://download.processing.org/processing-2.2.1-linux64.tgz
 http://download.processing.org/processing-2.2.1-linux32.tgz
 
 http://download.processing.org/processing-2.2.1-macosx.zip
+
+Hardware project
+----------------
+
+apt-get install -y kicad
+
 
 
 
