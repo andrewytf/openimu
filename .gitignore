@@ -24,3 +24,5 @@ FreeIMU_GUI/dist/scipy-0.11.0-sse2.exe
 FreeIMU_GUI/dist/scipy-0.11.0-sse3.exe
 FreeIMU_GUI/dist/scipy-0.11.0-win32-superpack-python2.7.exe
 FreeIMU_GUI/dist/SCRIPTS
+/Debug
+.settings
