@@ -20,24 +20,25 @@ void delayMicroseconds(int us){}
 void digitalWrite(int,int){}
 void pinMode(int, int){}
 
-void _Serial::begin(int){}
-void _Serial::print(char){}
-void _Serial::print(char*){}
-void _Serial::print(int,int){}
-void _Serial::println(){}
-void _Serial::println(char){}
-void _Serial::println(char*){}
-void _Serial::println(int,int){}
-void _Serial::write(int){}
-int _Serial::available(){ return 0;}
-int _Serial::read(){ return 0;}
-
+void _Serial::begin(int d){ printf("serial begin %d\r\n",d); }
+void _Serial::print(char c){ printf("%c",c); }
+void _Serial::print(char* str){ printf("%s",str); }
+void _Serial::print(int d,int f){ printf("d=%d f=%d",d,f); }
+void _Serial::println(){ printf("\r\n"); }
+void _Serial::println(char c){ print(c); println(); }
+void _Serial::println(char* str){ print(str); println(); }
+void _Serial::println(int d,int f){ print(d,f); println(); }
+void _Serial::write(int v){ printf("serial.write=%d\r\n",v); }
+int _Serial::available(){ return 1;}
+int _Serial::read(){ return getchar(); }
 _Serial Serial;
+
+
 
 void _SPI::begin(){}
 int _SPI::transfer(int){return 0;}
-
 _SPI SPI;
+
 
 void _Wire::begin(){}
 void _Wire::beginTransmission(int _dev_address){}
@@ -51,7 +52,7 @@ int _Wire::receive(){return 0;}
 
 _Wire Wire;
 
-int _EEPROM::read(int){return 0; }
-void _EEPROM::write(int,int){ }
+int _EEPROM::read(int addr){ int value=1; printf("eeprom read addr=%d value=%d\r\n",addr,value); return 0; }
+void _EEPROM::write(int addr,int value){ printf("eeprom write addr=%d value=%d\r\n",addr,value); }
 
 _EEPROM EEPROM;

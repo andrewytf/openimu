@@ -79,7 +79,7 @@
 #include <iostream> //	several standard stream objects
 #include <fstream> //	std::basic_fstream, std::basic_ifstream, std::basic_ofstream class templates and several typedefs
 #include <sstream> //	std::basic_stringstream, std::basic_istringstream, std::basic_ostringstream class templates and several typedefs
-#include <strstream> //	std::strstream, std::istrstream, std::ostrstream(deprecated)
+//#include <strstream> //	std::strstream, std::istrstream, std::ostrstream(deprecated)
 #include <iomanip> //	Helper functions to control the format or input and output
 #include <streambuf> //	std::basic_streambuf class template
 #include <cstdio> //	C-style input-output functions

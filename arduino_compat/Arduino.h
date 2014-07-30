@@ -48,8 +48,10 @@ public:
 	void print(char);
 	void print(char*);
 	void print(int,int);
+	void print(std::string a);
 
 	void println();
+	void println(std::string a);
 	void println(char);
 	void println(char*);
 	void println(int,int);

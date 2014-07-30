@@ -45,11 +45,24 @@ void setup() {
 
   // LED
   pinMode(13, OUTPUT);
+
+  //
+  printf("Commands\r\n");
+  printf("v - version\r\n");
+  printf("r - read raw 8 times ascii\r\n");
+  printf("b - read raw 8 times binary\r\n");
+  printf("q - print current quartenion\r\n");
+  printf("c - calibration read values from serial,write to eeprom and reload imu core\r\n");
+  printf("x - erase (calibration signature) eeprom and reload imu core\r\n");
+  printf("C - check calibration\r\n");
+  printf("d - debug\r\n");
 }
 
 char serial_busy_wait();
 
 void loop() {
+
+
   if(Serial.available()) {
     cmd = Serial.read();
     if(cmd=='v') {
