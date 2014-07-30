@@ -1,6 +1,7 @@
-FreeIMU
-=======
-http://www.varesano.net/projects/hardware/FreeIMU
+open-inertial-measurement-unit
+==============================
+
+fork FreeIMU project from http://www.varesano.net/projects/hardware/FreeIMU
 
 FreeIMU is an ongoing research project which aims to design Open Hardware 9/10 DOM/DOF Inertial Measurement Units as well as easy to use Orientation and Motion Sensing libraries, built on top of the Arduino platform.
 
