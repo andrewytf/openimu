@@ -46,6 +46,7 @@ void pinMode(int, int);
 
 class _Serial {
 public:
+        char buf[1024];
         int fd;
 	void begin(int);
         void socat_link(char*);
@@ -60,6 +61,7 @@ public:
 
 	int available();
 	int read();
+        void write(uint8_t* buf,int len);
 	void write(uint8_t);
 };
 extern _Serial Serial;

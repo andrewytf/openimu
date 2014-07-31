@@ -76,10 +76,11 @@ void pinMode(int pin, int mode){
 
 void _Serial::socat_link(char* dev){
   printf("serial.socat_link %s\r\n",dev);
-	if ((this->fd = open(dev,O_RDWR)) < 0) {
+	if ((this->fd = open(dev,O_RDWR|O_NOCTTY|O_NDELAY)) < 0) {
 		printf("Failed to open the bus.");
 		exit(1);
 	}
+  fcntl(fd,F_SETFL,0);
 }
 
 void _Serial::begin(int d){ 
@@ -87,31 +88,42 @@ void _Serial::begin(int d){
 }
 
 void _Serial::print(char c){ 
- printf("%c",c); 
+  int len=sprintf(buf,"%c",c);
+  printf("%s",buf);
+  ::write(fd,buf,len); 
 }
 
 void _Serial::print(char* str){ 
-  printf("%s",str); 
+  int len=sprintf(buf,"%s",str);
+  printf("%s",buf); 
+  ::write(fd,buf,len);
 }
 
 void _Serial::print(int d,int f){ 
-  printf("d=%d f=%d",d,f); 
+  int len=sprintf(buf,"d=%d f=%d",d,f); 
+  printf("%s",buf);
+  ::write(fd,buf,len);
 }
 
 void _Serial::println(){ 
-  printf("\r\n"); 
+   int len=sprintf(buf,"\r\n"); 
+   printf("%s",buf);
+  ::write(fd,buf,len);
 }
 
 void _Serial::println(char c){ 
-  print(c); println(); 
+  print(c); 
+  println(); 
 }
 
 void _Serial::println(char* str){ 
-  print(str); println(); 
+  print(str); 
+  println(); 
 }
 
 void _Serial::println(int d,int f){ 
-  print(d,f); println(); 
+  print(d,f); 
+  println(); 
 }
 
 void _Serial::write(uint8_t v){ 
@@ -119,9 +131,17 @@ void _Serial::write(uint8_t v){
   ::write(fd,&v,1);
 }
 
+void _Serial::write(uint8_t* buf,int len){ 
+   printf("serial.write len=%d\r\n",len); 
+   ::write(fd,buf,len);
+}
+
+
 int _Serial::available(){
-  printf("serial.available\r\n");
-  return 1;
+  int bytes_available;
+  ioctl(fd, FIONREAD, &bytes_available);
+  //printf("serial.available=%d\r\n",bytes_available);
+  return bytes_available>0?1:0;
 }
 
 int _Serial::read(){ 
@@ -234,7 +254,8 @@ _Wire Wire;
 
 _EEPROM::_EEPROM(){
    //calibration signature
-   mem[0xa]=0x19;
+   //mem[0xa]=0x19;
+
 }
 
 int _EEPROM::read(int addr){
