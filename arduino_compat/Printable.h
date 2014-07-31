@@ -1,6 +1,6 @@
 /*
-  EEPROM.h - EEPROM library
-  Copyright (c) 2006 David A. Mellis.  All right reserved.
+  Printable.h - Interface class that allows printing of complex types
+  Copyright (c) 2011 Adrian McEwen.  All right reserved.
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -17,19 +17,24 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef EEPROM_h
-#define EEPROM_h
+#ifndef Printable_h
+#define Printable_h
 
-#include <inttypes.h>
+#include <new.h>
 
-class EEPROMClass
+class Print;
+
+/** The Printable class provides a way for new classes to allow themselves to be printed.
+    By deriving from Printable and implementing the printTo method, it will then be possible
+    for users to print out instances of this class by passing them into the usual
+    Print::print and Print::println methods.
+*/
+
+class Printable
 {
   public:
-    uint8_t read(int);
-    void write(int, uint8_t);
+    virtual size_t printTo(Print& p) const = 0;
 };
-
-extern EEPROMClass EEPROM;
 
 #endif
 

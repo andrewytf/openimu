@@ -101,7 +101,7 @@ void BMP085::getPressure(int32_t *_Pa){
   calcTruePressure(&TruePressure); 
   *_Pa = TruePressure / pow((1 - (float)_param_centimeters / 4433000), 5.255) + _Pa_Offset;
   // converting from float to int32_t truncates toward zero, 1010.999985 becomes 1010 resulting in 1 Pa error (max).  
-  // Note that BMP085 abs accuracy from 700...1100hPa and 0..+65ºC is +-100Pa (typ.)
+  // Note that BMP085 abs accuracy from 700...1100hPa and 0..+65ï¿½C is +-100Pa (typ.)
 }
 
 void BMP085::getAltitude(int32_t *_centimeters){
@@ -224,21 +224,21 @@ void BMP085::getCalData() {
 
 void BMP085::writemem(uint8_t _addr, uint8_t _val) {
   Wire.beginTransmission(_dev_address);   // start transmission to device 
-  Wire.send(_addr); // send register address
-  Wire.send(_val); // send value to write
+  Wire.write(_addr); // send register address
+  Wire.write(_val); // send value to write
   Wire.endTransmission(); // end transmission
 }
 
 void BMP085::readmem(uint8_t _addr, uint8_t _nbytes, uint8_t __buff[]) {
   Wire.beginTransmission(_dev_address); // start transmission to device 
-  Wire.send(_addr); // sends register address to read from
+  Wire.write(_addr); // sends register address to read from
   Wire.endTransmission(); // end transmission
   
   Wire.beginTransmission(_dev_address); // start transmission to device 
   Wire.requestFrom(_dev_address, _nbytes);// send data n-bytes read
   uint8_t i = 0; 
   while (Wire.available()) {
-    __buff[i] = Wire.receive(); // receive DATA
+    __buff[i] = Wire.read(); // receive DATA
     i++;
   }
   Wire.endTransmission(); // end transmission

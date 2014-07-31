@@ -31,7 +31,7 @@
 #ifndef BMP085_h
 #define BMP085_h
 
-#include "WProgram.h"
+#include "Arduino.h"
 
 #define BMP085_ADDR                 0x77     //0x77 default I2C address
 #define BUFFER_SIZE                 3
@@ -107,7 +107,7 @@ public:
   // BMP Sensors
   void getPressure(int32_t *_Pa);                // pressure in Pa + offset  
   void getAltitude(int32_t *_centimeters);       // altitude in centimeters + offset  
-  void getTemperature(int32_t *_Temperature);    // temperature in Cº   
+  void getTemperature(int32_t *_Temperature);    // temperature in Cï¿½   
   void calcTrueTemperature();                    // calc temperature data b5 (only needed if AUTO_UPDATE_TEMPERATURE is false)  
   void calcTruePressure(long *_TruePressure);    // calc Pressure in Pa     
   // dummy stuff
