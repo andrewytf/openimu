@@ -1,1 +1,1 @@
-socat -d -d PTY,link=/dev/vmodem TCP-LISTEN:92
+socat -d -d PTY,link=/dev/vmodem TCP-LISTEN:93

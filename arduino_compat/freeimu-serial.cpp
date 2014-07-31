@@ -207,7 +207,7 @@ void eeprom_serial_dump_column() {
 
 
 int main(int argc,char** argv){
-    Serial.socat_link(argv[1]);
+    Serial.socat_link("/dev/vmodem");
     setup();
     while(1) loop();
 	return 0;
