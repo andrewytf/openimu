@@ -8,7 +8,9 @@
 #ifndef ARDUINO_H_
 #define ARDUINO_H_
 
-#include "cppheaders.h"
+#include <stdio.h>
+#include <stdint.h>
+#include <math.h>
 
 enum ___levels {LOW, HIGH};
 enum ___numericbase { HEX,DEC,BIN };
@@ -48,10 +50,8 @@ public:
 	void print(char);
 	void print(char*);
 	void print(int,int);
-	void print(std::string a);
 
 	void println();
-	void println(std::string a);
 	void println(char);
 	void println(char*);
 	void println(int,int);
@@ -84,7 +84,7 @@ public:
 
 	int fd;
 	int addr;
-	uint8_t buffer[64];
+	uint8_t buffer[1024];
 	int rx_count;
         int rx_idx;
 };

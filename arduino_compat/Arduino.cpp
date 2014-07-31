@@ -102,53 +102,67 @@ void _Wire::begin(){
 	}
 
 }
+
 void _Wire::beginTransmission(int _dev_address){
+        addr=_dev_address;
 	if (ioctl(this->fd,I2C_SLAVE,_dev_address) < 0) {
 		printf("Failed to acquire bus access and/or talk to slave.\n");
 	}
-        printf("wire.begintransmission addr=%x\r\n",_dev_address);
+        //printf("wire.begintransmission addr=%x\r\n",_dev_address);
 }
 int _Wire::endTransmission(){
-        printf("wire.endtransmission\r\n");
+        //printf("wire.endtransmission\r\n");
 	return 0;
 }
 
 void _Wire::write(uint8_t value){
-        printf("wire.write=%x\r\n",value);
+        //////printf("wire.write addr=%02x value=%02x\r\n",addr,value);
 	::write(this->fd,&value,1);
 }
 
 
 void _Wire::send(int value){
-        printf("wire.send -> write\r\n");
+        //printf("wire.send -> write\r\n");
 	this->write(value);
 }
 
 uint8_t _Wire::read(){
         rx_count--;
         uint8_t value = this->buffer[this->rx_idx++ ];
-        printf("wire.read value=%x\r\n",value);
+        //printf("wire.read value=%02x\r\n",value);
 	return value;
 }
 
 int _Wire::receive(){
-        printf("wire.receive -> read\r\n");
+        //printf("wire.receive -> read\r\n");
 	return read();
 }
 
 void _Wire::requestFrom(int _dev_address,int _nbytes){
+        addr=_dev_address;
 	if (ioctl(this->fd,I2C_SLAVE,_dev_address) < 0) {
 		printf("Failed to acquire bus access and/or talk to slave.\n");
 	}
-        this->rx_idx=0;
-	this->rx_count= ::read(this->fd, &this->buffer[0],sizeof(this->buffer));
-        rx_count=_nbytes;
-	printf("wire.requestFrom addr=0x%x bytes=%d rxed=%d\r\n",_dev_address,_nbytes,this->rx_count);
 
+        memset(&buffer,0,sizeof(buffer));        
+
+        int bytes= _nbytes>sizeof(buffer)?sizeof(buffer):_nbytes;
+	rx_idx=0;
+	rx_count= ::read(this->fd, &this->buffer[0],bytes);
+
+
+	////////printf("wire.read  addr=%x bytes=%d rxed=%d ",addr,_nbytes,this->rx_count);
+/*
+        printf("rxbuf=");
+        for(int i=0;i<rx_count;i++){
+         printf("|%02x",buffer[i]);
+        }
+        printf("|\r\n");
+*/
 }
 
 int _Wire::available(){
-        printf("wire.available count=%d\r\n",rx_count);
+        //printf("wire.available count=%d\r\n",rx_count);
 	return this->rx_count>0?1:0;
 }
 
