@@ -19,10 +19,10 @@
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
+#include <fcntl.h>  /* File control definitions */
+#include <unistd.h> /* UNIX standard function definitions */
 #include <sys/time.h>
-
+#include <termios.h> /* POSIX terminal control definitions */
 
 void HardwareSerial::begin(unsigned long baud)
 {
@@ -80,6 +80,22 @@ void HardwareSerial::socat_link(char* dev){
 		exit(1);
 	}
 	fcntl(fd,F_SETFL,0);
+
+struct termios options;
+
+//get attributes
+tcgetattr(fd, &options);
+
+//cfsetispeed(&options, B19200);
+//cfsetospeed(&options, B19200);
+
+//configure for raw input (not wait for enter)
+options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
+
+//set attributes
+tcsetattr(fd, TCSANOW, &options);
+
+
 }
 
 HardwareSerial::HardwareSerial(){
