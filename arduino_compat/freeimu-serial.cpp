@@ -207,7 +207,11 @@ void eeprom_serial_dump_column() {
 
 
 int main(int argc,char** argv){
-    Serial.socat_link("/dev/vmodem");
+
+    system("systemctl stop serial-getty@ttyGS0.service");
+
+ 
+    Serial.socat_link("/dev/ttyGS0");
     setup();
     while(1) loop();
 	return 0;

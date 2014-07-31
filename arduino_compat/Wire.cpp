@@ -45,7 +45,6 @@ extern "C" {
 
 #include "Wire.h"
 
-// Initialize Class Variables //////////////////////////////////////////////////
 
 uint8_t TwoWire::rxBuffer[BUFFER_LENGTH];
 uint8_t TwoWire::rxBufferIndex = 0;
@@ -56,12 +55,6 @@ uint8_t TwoWire::txBuffer[BUFFER_LENGTH];
 uint8_t TwoWire::txBufferIndex = 0;
 uint8_t TwoWire::txBufferLength = 0;
 
-uint8_t TwoWire::transmitting = 0;
-
-void (*TwoWire::user_onRequest)(void);
-void (*TwoWire::user_onReceive)(int);
-
-// Constructors ////////////////////////////////////////////////////////////////
 
 TwoWire::TwoWire()
 {
@@ -88,10 +81,10 @@ void TwoWire::begin(void)
 
 void TwoWire::begin(uint8_t address)
 {
- printf("wire.begin addr=%02x\r\n",address);
-	if (ioctl(this->fd,I2C_SLAVE,address) < 0) {
+   printf("wire.begin addr=%02x\r\n",address);
+   if (ioctl(this->fd,I2C_SLAVE,address) < 0) {
 		printf("Failed to acquire bus access and/or talk to slave.\n");
-	}
+  }
 
   begin();
 }
@@ -117,9 +110,9 @@ uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity, uint8_t sendStop
   rxBufferIndex = 0;
   rxBufferLength = read;
 
-  //printf("wire.read  addr=%02x bytes=%3d |",address,read);
-  //for(int i=0;i<read;i++) printf("%02x|",rxBuffer[i]);
-  //printf("\r\n");
+  printf("wire.read  addr=%02x bytes=%3d |",address,read);
+  for(int i=0;i<read;i++) printf("%02x|",rxBuffer[i]);
+  printf("\r\n");
   return read;
 }
 
@@ -140,18 +133,13 @@ uint8_t TwoWire::requestFrom(int address, int quantity, int sendStop)
 
 void TwoWire::beginTransmission(uint8_t address)
 {
-      if (ioctl(this->fd,I2C_SLAVE,address) < 0) {
-                printf("Failed to acquire bus access and/or talk to slave.\n");
-        }
-
-
-  // indicate that we are transmitting
-  transmitting = 1;
-  // set address of targeted slave
   txAddress = address;
-  // reset tx buffer iterator vars
+
   txBufferIndex = 0;
   txBufferLength = 0;
+
+
+
 }
 
 void TwoWire::beginTransmission(int address)
@@ -161,7 +149,7 @@ void TwoWire::beginTransmission(int address)
 
 uint8_t TwoWire::endTransmission(uint8_t sendStop)
 {
-  return 1;
+  return 0;
 }
 
 uint8_t TwoWire::endTransmission(void)
@@ -177,10 +165,13 @@ size_t TwoWire::write(uint8_t data)
 
 size_t TwoWire::write(const uint8_t *data, size_t quantity)
 {
+      if (ioctl(this->fd,I2C_SLAVE,txAddress) < 0) {
+                printf("Failed to acquire bus access and/or talk to slave.\n");
+        }
   ::write(fd,data,quantity);
-//  printf("wire.write addr=%02x bytes=%3d ",txAddress,quantity);
-//  for(int i=0;i<quantity;i++) printf("|%02x",data[i]);
-//  printf("|\r\n");
+  printf("wire.write addr=%02x bytes=%3d ",txAddress,quantity);
+  for(int i=0;i<quantity;i++) printf("|%02x",data[i]);
+  printf("|\r\n");
   
   return quantity;
 }
@@ -202,18 +193,13 @@ int TwoWire::read(void)
 
 int TwoWire::peek(void)
 {
-  int value = -1;
-  
-  if(rxBufferLength>0){
-    value = rxBuffer[rxBufferIndex];
-  }
-
-  return value;
+   printf("wire.peek\r\n");
+   return -1;
 }
 
 void TwoWire::flush(void)
 {
-  // XXX: to be implemented.
+   printf("wire.flush\r\n");
 }
 
 

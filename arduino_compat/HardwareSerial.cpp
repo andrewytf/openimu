@@ -40,32 +40,41 @@ int HardwareSerial::available(void)
 {
 	int bytes_available;
 	ioctl(fd, FIONREAD, &bytes_available);
+        
+        if(bytes_available>0)printf("serial.avail %d\r\n",bytes_available);
 	return bytes_available;
 }
 
+
 int HardwareSerial::peek(void)
 {
+    printf("serial.peek\r\n");
     return -1;
 }
 
+uint8_t buf[2048];
+
 int HardwareSerial::read(void)
 {
-	uint8_t value;
-	if( ::read(fd,&value,1) == 1){
-		return value;
-	} else {
-	    return -1;
-	}
+
+	::read(fd,buf,2048);
+  
+//   tcflush(fd,TCIOFLUSH);
+
+   printf("serial.read '%c'\r\n",buf[0]);
+   return buf[0];
 }
 
 void HardwareSerial::flush()
 {
-
+   printf("serial.flush\r\n");
 }
 
 size_t HardwareSerial::write(uint8_t c)
 {
   ::write(fd,&c,1);
+//tcflush(fd,TCIOFLUSH);
+
   return 1;
 }
 
@@ -75,26 +84,48 @@ HardwareSerial::operator bool() {
 
 void HardwareSerial::socat_link(char* dev){
 	printf("serial.socat_link %s\r\n",dev);
-	if ((this->fd = open(dev,O_RDWR|O_NOCTTY|O_NDELAY)) < 0) {
-		printf("Failed to open the bus.");
-		exit(1);
-	}
-	fcntl(fd,F_SETFL,0);
 
-struct termios options;
+      fd = open( dev, O_RDWR| O_NOCTTY );
 
-//get attributes
-tcgetattr(fd, &options);
+    struct termios tty;
+struct termios tty_old;
+memset (&tty, 0, sizeof tty);
 
-//cfsetispeed(&options, B19200);
-//cfsetospeed(&options, B19200);
+/* Error Handling */
+if ( tcgetattr (fd, &tty ) != 0 )
+{
+  perror(dev); exit(1);
+}
 
-//configure for raw input (not wait for enter)
-options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
+/* Save old tty parameters */
+tty_old = tty;
 
-//set attributes
-tcsetattr(fd, TCSANOW, &options);
+/* Set Baud Rate */
+cfsetospeed (&tty, (speed_t)B115200);
+cfsetispeed (&tty, (speed_t)B115200);
 
+/* Setting other Port Stuff */
+tty.c_cflag     &=  ~PARENB;        // Make 8n1
+tty.c_cflag     &=  ~CSTOPB;
+tty.c_cflag     &=  ~CSIZE;
+tty.c_cflag     |=  CS8;
+
+tty.c_cflag     &=  ~CRTSCTS;       // no flow control
+tty.c_cc[VMIN]      =   1;                  // read doesn't block
+tty.c_cc[VTIME]     =   5;                  // 0.5 seconds read timeout
+tty.c_cflag     |=  CREAD | CLOCAL;     // turn on READ & ignore ctrl lines
+
+/* Make raw */
+cfmakeraw(&tty);
+
+/* Flush Port, then applies attributes */
+tcflush( fd, TCIFLUSH );
+if ( tcsetattr ( fd, TCSANOW, &tty ) != 0)
+{
+  perror(dev); exit(1);
+}                                   
+                                                                                
+                                               
 
 }
 
