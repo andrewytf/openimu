@@ -81,6 +81,11 @@ public:
 	uint8_t read();
 	void send(int);
 	int receive();
+
+	int fd;
+	int addr;
+	uint8_t buffer[64];
+	int rx_count;
 };
 
 extern _Wire Wire;
