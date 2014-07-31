@@ -92,6 +92,13 @@ void _Serial::print(char c){
 	printf("%s",buf);
 	::write(fd,buf,len);
 }
+
+void _Serial::print(int16_t c){
+	int len=sprintf(buf,"%d",c);
+	printf("%s",buf);
+	::write(fd,buf,len);
+}
+
 void _Serial::print(float c){
 	int len=sprintf(buf,"%f",c);
 	printf("%s",buf);
@@ -122,6 +129,10 @@ void _Serial::println(){
 }
 
 void _Serial::println(char c){ 
+	print(c);
+	println();
+}
+void _Serial::println(int16_t c){
 	print(c);
 	println();
 }

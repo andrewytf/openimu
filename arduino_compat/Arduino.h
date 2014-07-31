@@ -55,9 +55,11 @@ public:
 	void print(int,int);
 	void print(float);
 	void print(double);
+	void print(int16_t);
 
 	void println();
 	void println(char);
+	void println(int16_t);
 	void println(float);
 	void println(double);
 	void println(char*);
