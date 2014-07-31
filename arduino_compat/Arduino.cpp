@@ -34,7 +34,8 @@ unsigned long micros(void){
 	double seconds = start.tv_sec + start.tv_usec/1000000.0;
 	double micros = seconds*1000000.0;
 
-	printf("micros %f %f\r\n",seconds,micros);
+	unsigned long ret = micros;
+	printf("micros %f %ul\r\n",seconds,ret);
 	return micros;
 }
 
@@ -43,7 +44,8 @@ unsigned long millis(void){
 	gettimeofday(&start, NULL);
 	double seconds = start.tv_sec + start.tv_usec/1000000.0;
 	double millis = seconds*1000.0;
-	printf("millis %f %f\r\n",seconds,millis);
+	unsigned long ret = millis;
+	printf("millis %f %ul\r\n",seconds,ret);
 	return millis;
 }
 
