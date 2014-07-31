@@ -33,8 +33,8 @@ typedef uint8_t byte;
 #define max(a,b)  a>b?a:b
 
 //
-int micros();
-int millis();
+long micros();
+long millis();
 
 //
 void delay(int ms);
@@ -46,7 +46,9 @@ void pinMode(int, int);
 
 class _Serial {
 public:
+        int fd;
 	void begin(int);
+        void socat_link(char*);
 	void print(char);
 	void print(char*);
 	void print(int,int);
@@ -58,7 +60,7 @@ public:
 
 	int available();
 	int read();
-	void write(int);
+	void write(uint8_t);
 };
 extern _Serial Serial;
 

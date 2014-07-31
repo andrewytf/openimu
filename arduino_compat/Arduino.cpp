@@ -20,17 +20,29 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/time.h>
 
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
 //
-int micros(){
-	return 0;
+long micros(){
+    struct timeval start;
+    gettimeofday(&start, NULL);
+    double seconds = start.tv_sec + start.tv_usec/1000000.0;
+    double micros = seconds*1000000.0;
+
+    printf("micros %f %f\r\n",seconds,micros);
+    return micros;
 }
 
-int millis(){
-	return 0;
+long millis(){
+   struct timeval start;
+    gettimeofday(&start, NULL);
+    double seconds = start.tv_sec + start.tv_usec/1000000.0;
+    double millis = seconds*1000.0;
+    printf("millis %f %f\r\n",seconds,millis);
+    return millis;
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -38,38 +50,86 @@ int millis(){
 
 //
 void delay(int ms){
+        printf("delay=%d\r\n",ms);
 	usleep(ms*1000);
 }
 void delayMicroseconds(int us){
+   printf("delayMicroseconds=%d\r\n",us);
 	usleep(us);
 }
+
 
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
 //
-void digitalWrite(int,int){
-
+void digitalWrite(int pin,int value){
+  printf("digitalWrite pin=%d value=%d\r\n",pin,value);
 }
 
-void pinMode(int, int){
-
+void pinMode(int pin, int mode){
+  printf("pinmode pin=%d mode=%d\r\n",pin,mode);
 }
 
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
-void _Serial::begin(int d){ printf("serial begin %d\r\n",d); }
-void _Serial::print(char c){ printf("%c",c); }
-void _Serial::print(char* str){ printf("%s",str); }
-void _Serial::print(int d,int f){ printf("d=%d f=%d",d,f); }
-void _Serial::println(){ printf("\r\n"); }
-void _Serial::println(char c){ print(c); println(); }
-void _Serial::println(char* str){ print(str); println(); }
-void _Serial::println(int d,int f){ print(d,f); println(); }
-void _Serial::write(int v){ printf("serial.write=%d\r\n",v); }
-int _Serial::available(){ return 1;}
-int _Serial::read(){ return getchar(); }
+void _Serial::socat_link(char* dev){
+  printf("serial.socat_link %s\r\n",dev);
+	if ((this->fd = open(dev,O_RDWR)) < 0) {
+		printf("Failed to open the bus.");
+		exit(1);
+	}
+}
+
+void _Serial::begin(int d){ 
+  printf("serial begin %d\r\n",d); 
+}
+
+void _Serial::print(char c){ 
+ printf("%c",c); 
+}
+
+void _Serial::print(char* str){ 
+  printf("%s",str); 
+}
+
+void _Serial::print(int d,int f){ 
+  printf("d=%d f=%d",d,f); 
+}
+
+void _Serial::println(){ 
+  printf("\r\n"); 
+}
+
+void _Serial::println(char c){ 
+  print(c); println(); 
+}
+
+void _Serial::println(char* str){ 
+  print(str); println(); 
+}
+
+void _Serial::println(int d,int f){ 
+  print(d,f); println(); 
+}
+
+void _Serial::write(uint8_t v){ 
+  printf("serial.write=%d\r\n",v); 
+  ::write(fd,&v,1);
+}
+
+int _Serial::available(){
+  printf("serial.available\r\n");
+  return 1;
+}
+
+int _Serial::read(){ 
+  uint8_t v;
+  ::read(fd,&v,1);
+  printf("serial.read %02x\r\n",v);
+  return v; 
+}
 
 _Serial Serial;
 
