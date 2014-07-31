@@ -46,36 +46,40 @@ void pinMode(int, int);
 
 class _Serial {
 public:
-        char buf[1024];
-        int fd;
+	char buf[1024];
+	int fd;
 	void begin(int);
-        void socat_link(char*);
+	void socat_link(char*);
 	void print(char);
 	void print(char*);
 	void print(int,int);
+	void print(float);
+	void print(double);
 
 	void println();
 	void println(char);
+	void println(float);
+	void println(double);
 	void println(char*);
 	void println(int,int);
 
 	int available();
 	int read();
-        void write(uint8_t* buf,int len);
+	void write(uint8_t* buf,int len);
 	void write(uint8_t);
 };
 extern _Serial Serial;
 
 class _SPI {
 public:
-    void begin();
-    int transfer(int);
+	void begin();
+	int transfer(int);
 };
 extern _SPI SPI;
 
 class _Wire {
 public:
-    void begin();
+	void begin();
 	void beginTransmission(int _dev_address);
 	int endTransmission();
 	void write(uint8_t value);
@@ -90,17 +94,17 @@ public:
 	int addr;
 	uint8_t buffer[1024];
 	int rx_count;
-        int rx_idx;
+	int rx_idx;
 };
 
 extern _Wire Wire;
 
 class _EEPROM {
 public:
-    uint8_t mem[2048];
-    _EEPROM();
-    int read(int);
-    void write(int,int);
+	uint8_t mem[2048];
+	_EEPROM();
+	int read(int);
+	void write(int,int);
 };
 
 extern _EEPROM EEPROM;
