@@ -137,11 +137,12 @@ _Serial Serial;
 /////////////////////////////////////////////////////////////////////////////////
 
 void _SPI::begin(){
-
+   printf("spi.begin\r\n");
 }
 
 int _SPI::transfer(int x){
-	return x;
+   printf("spi.transfer %d\r\n",x);
+   return x;
 }
 
 _SPI SPI;
