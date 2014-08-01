@@ -25,17 +25,16 @@
 #include <inttypes.h>
 #include "Stream.h"
 
-#define BUFFER_LENGTH 32
 
 class TwoWire : public Stream
 {
   private:
-    static uint8_t rxBuffer[];
+    static uint8_t rxBuffer[2048];
     static uint8_t rxBufferIndex;
     static uint8_t rxBufferLength;
 
     static uint8_t txAddress;
-    static uint8_t txBuffer[];
+    static uint8_t txBuffer[2048];
     static uint8_t txBufferIndex;
     static uint8_t txBufferLength;
 

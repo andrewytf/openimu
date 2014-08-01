@@ -46,14 +46,6 @@ extern "C" {
 #include "Wire.h"
 
 
-uint8_t TwoWire::rxBuffer[BUFFER_LENGTH];
-uint8_t TwoWire::rxBufferIndex = 0;
-uint8_t TwoWire::rxBufferLength = 0;
-
-uint8_t TwoWire::txAddress = 0;
-uint8_t TwoWire::txBuffer[BUFFER_LENGTH];
-uint8_t TwoWire::txBufferIndex = 0;
-uint8_t TwoWire::txBufferLength = 0;
 
 
 TwoWire::TwoWire()
@@ -73,25 +65,15 @@ TwoWire::TwoWire()
 
 void TwoWire::begin(void)
 {
-  rxBufferIndex = 0;
-  rxBufferLength = 0;
-  txBufferIndex = 0;
-  txBufferLength = 0;
 }
 
 void TwoWire::begin(uint8_t address)
 {
-   printf("wire.begin addr=%02x\r\n",address);
-   if (ioctl(this->fd,I2C_SLAVE,address) < 0) {
-		printf("Failed to acquire bus access and/or talk to slave.\n");
-  }
-
-  begin();
 }
 
 void TwoWire::begin(int address)
 {
-  begin((uint8_t)address);
+
 }
 
 uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity, uint8_t sendStop)
@@ -102,13 +84,11 @@ uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity, uint8_t sendStop
         }
 
 
-  if(quantity > BUFFER_LENGTH){
-    quantity = BUFFER_LENGTH;
-  }
-
-  uint8_t read = ::read(fd,&rxBuffer,quantity);
   rxBufferIndex = 0;
-  rxBufferLength = read;
+  int ret= ::read(fd,&rxBuffer,quantity);
+  if(ret==-1){ perror("wire.request"); exit(1); }
+  if(ret==0){ printf("wire.request eof\r\n"); exit(1);}
+  rxBufferLength = ret;
 
   printf("wire.read  addr=%02x bytes=%3d |",address,read);
   for(int i=0;i<read;i++) printf("%02x|",rxBuffer[i]);
