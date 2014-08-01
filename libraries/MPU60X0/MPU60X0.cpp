@@ -41,6 +41,7 @@ THE SOFTWARE.
  * @see MPU60X0_DEFAULT_SS_PIN
  */
 MPU60X0::MPU60X0() {
+  printf("%s\r\n",__FUNCTION__);
   devAddr = MPU60X0_DEFAULT_ADDRESS;
 }
 
@@ -64,6 +65,7 @@ MPU60X0::MPU60X0(bool useSPI, uint8_t address) {
  * the default internal clock source.
  */
 void MPU60X0::initialize() {
+	printf("%s\r\n",__FUNCTION__);
     // SPI Configuration
 	if (bSPI) {
       SPI.begin();
@@ -85,6 +87,7 @@ void MPU60X0::initialize() {
  * @return True if connection is valid, false otherwise
  */
 bool MPU60X0::testConnection() {
+	printf("%s\r\n",__FUNCTION__);
     return getDeviceID() == 0b110100;
 }
 
@@ -263,6 +266,7 @@ uint8_t MPU60X0::getFullScaleGyroRange() {
  * @see MPU60X0_GCONFIG_FS_SEL_LENGTH
  */
 void MPU60X0::setFullScaleGyroRange(uint8_t range) {
+	printf("%s\r\n",__FUNCTION__);
     I2Cdev::writeBits(bSPI, devAddr, MPU60X0_RA_GYRO_CONFIG, MPU60X0_GCONFIG_FS_SEL_BIT, MPU60X0_GCONFIG_FS_SEL_LENGTH, range);
 }
 
@@ -339,6 +343,7 @@ uint8_t MPU60X0::getFullScaleAccelRange() {
  * @see getFullScaleAccelRange()
  */
 void MPU60X0::setFullScaleAccelRange(uint8_t range) {
+	printf("%s\r\n",__FUNCTION__);
     I2Cdev::writeBits(bSPI, devAddr, MPU60X0_RA_ACCEL_CONFIG, MPU60X0_ACONFIG_AFS_SEL_BIT, MPU60X0_ACONFIG_AFS_SEL_LENGTH, range);
 }
 /** Get the high-pass filter configuration.
@@ -878,7 +883,7 @@ void MPU60X0::setMasterClockSpeed(uint8_t speed) {
  * In read mode, the result of the read is placed in the lowest available 
  * EXT_SENS_DATA register. For further information regarding the allocation of
  * read results, please refer to the EXT_SENS_DATA register description
- * (Registers 73 – 96).
+ * (Registers 73 ï¿½ 96).
  *
  * The MPU-6050 supports a total of five slaves, but Slave 4 has unique
  * characteristics, and so it has its own functions (getSlave4* and setSlave4*).
@@ -2394,6 +2399,7 @@ bool MPU60X0::getSleepEnabled() {
  * @see MPU60X0_PWR1_SLEEP_BIT
  */
 void MPU60X0::setSleepEnabled(bool enabled) {
+	printf("%s\r\n",__FUNCTION__);
     I2Cdev::writeBit(bSPI, devAddr, MPU60X0_RA_PWR_MGMT_1, MPU60X0_PWR1_SLEEP_BIT, enabled);
 }
 /** Get wake cycle enabled status.
@@ -2487,6 +2493,7 @@ uint8_t MPU60X0::getClockSource() {
  * @see MPU60X0_PWR1_CLKSEL_LENGTH
  */
 void MPU60X0::setClockSource(uint8_t source) {
+	printf("%s\r\n",__FUNCTION__);
     I2Cdev::writeBits(bSPI, devAddr, MPU60X0_RA_PWR_MGMT_1, MPU60X0_PWR1_CLKSEL_BIT, MPU60X0_PWR1_CLKSEL_LENGTH, source);
 }
 
@@ -2710,6 +2717,7 @@ void MPU60X0::setFIFOByte(uint8_t data) {
  * @see MPU60X0_WHO_AM_I_LENGTH
  */
 uint8_t MPU60X0::getDeviceID() {
+	printf("%s\r\n",__FUNCTION__);
     I2Cdev::readBits(bSPI, devAddr, MPU60X0_RA_WHO_AM_I, MPU60X0_WHO_AM_I_BIT, MPU60X0_WHO_AM_I_LENGTH, buffer);
     return buffer[0];
 }

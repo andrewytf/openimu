@@ -154,7 +154,7 @@ size_t TwoWire::write(uint8_t data)
 size_t TwoWire::write(const uint8_t *data, size_t quantity)
 {
   printf("wire.write addr=%02x bytes=%3d ",txAddress,quantity);
-  for(int i=0;i<quantity;i++) printf("|%02x",data[i]);
+  for(size_t i=0;i<quantity;i++) printf("|%02x",data[i]);
   printf("|\r\n");
 
 

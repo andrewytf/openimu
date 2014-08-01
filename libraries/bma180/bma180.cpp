@@ -23,7 +23,7 @@ void BMA180::readAccel(int * buff) {
 
 void BMA180::readAccel(int * x, int * y, int * z)
 {
-  unsigned int result;
+  //unsigned int result=0;
 
   Wire.beginTransmission(address);
   Wire.write(0x02);
@@ -46,7 +46,8 @@ void BMA180::readAccel(int * x, int * y, int * z)
     temp = Wire.read();
     if (temp&0x80) temp|=0xff00;
   }
-  result = Wire.endTransmission();
+//  result =
+		  Wire.endTransmission();
 }
 
 float BMA180::getGSense()
@@ -61,6 +62,7 @@ float BMA180::getGSense()
         case G8: return 8.0;
         case G16: return 16.0;
     }
+    return 1.0;
 }
 
 float BMA180::getXValFloat()

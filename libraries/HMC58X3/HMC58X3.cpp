@@ -186,7 +186,9 @@ bool HMC58X3::calibrate(unsigned char gain,unsigned int n_samples)
                 */
                 if (-(1<<12) >= min(xyz[0],min(xyz[1],xyz[2])))
                 {
+#ifdef DEBUG
                     DEBUG_PRINT("HMC58x3 Self test saturated. Increase range.");
+#endif
                     bret=false;
                     break;  // Breaks out of the for loop.  No sense in continuing if we saturated.
                 }
@@ -210,7 +212,9 @@ bool HMC58X3::calibrate(unsigned char gain,unsigned int n_samples)
                 */
                 if (-(1<<12) >= min(xyz[0],min(xyz[1],xyz[2])))
                 {
+#ifdef DEBUG
                     DEBUG_PRINT("HMC58x3 Self test saturated. Increase range.");
+#endif
                     bret=false;
                     break;  // Breaks out of the for loop.  No sense in continuing if we saturated.
                 }
@@ -236,7 +240,9 @@ bool HMC58X3::calibrate(unsigned char gain,unsigned int n_samples)
                 z_scale=(counts_per_milligauss[gain]*(HMC58X3_Z_SELF_TEST_GAUSS*2))/(xyz_total[2]/n_samples);
             }else
             {
+#ifdef DEBUG
                 DEBUG_PRINT("HMC58x3 Self test out of range.");
+#endif
                 bret=false;
             }
             writeReg(HMC58X3_R_CONFA, 0x010); // set RegA/DOR back to default.
@@ -245,7 +251,9 @@ bool HMC58X3::calibrate(unsigned char gain,unsigned int n_samples)
             #if defined(ISHMC5843)
                 DEBUG_PRINT("HMC5843 failed id check.");
             #else
+#ifdef DEBUG
                 DEBUG_PRINT("HMC5883L failed id check.");
+#endif
             #endif
             bret=false;
         }
@@ -253,7 +261,9 @@ bool HMC58X3::calibrate(unsigned char gain,unsigned int n_samples)
     {   /*
             Bad input parameters.
         */
+#ifdef DEBUG
         DEBUG_PRINT("HMC58x3 Bad parameters.");
+#endif
         bret=false;
     }
     return(bret);

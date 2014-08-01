@@ -69,13 +69,13 @@ float MS561101BA::getPressure(uint8_t OSR) {
   // see datasheet page 7 for formulas
   
   uint32_t rawPress = rawPressure(OSR);
-  if(rawPress == NULL) {
-    return NULL;
+  if(rawPress == 0) {
+    return 0;
   }
   
   int32_t dT = getDeltaTemp(OSR);
-  if(dT == NULL) {
-    return NULL;
+  if(dT == 0) {
+    return 0;
   }
   
   int64_t off  = ((uint32_t)_Cal[1] <<16) + (((int64_t)dT * _Cal[3]) >> 7);
@@ -87,21 +87,21 @@ float MS561101BA::getTemperature(uint8_t OSR) {
   // see datasheet page 7 for formulas
   int64_t dT = getDeltaTemp(OSR);
   
-  if(dT != NULL) {
+  if(dT != 0) {
     return (2000 + ((dT * _Cal[5]) >> 23)) / 100.0;
   }
   else {
-    return NULL;
+    return 0;
   }
 }
 
 int32_t MS561101BA::getDeltaTemp(uint8_t OSR) {
   uint32_t rawTemp = rawTemperature(OSR);
-  if(rawTemp != NULL) {
+  if(rawTemp != 0) {
     return (int32_t)(rawTemp - ((uint32_t)_Cal[4] << 8));
   }
   else {
-    return NULL;
+    return 0;
   }
 }
 

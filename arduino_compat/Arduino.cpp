@@ -44,7 +44,7 @@ unsigned long micros(void){
 
 
 	unsigned long ret = micros;
-	printf("micros %u\r\n",ret);
+	printf("micros %lu\r\n",ret);
 	return micros;
 }
 
@@ -60,7 +60,7 @@ unsigned long millis(void){
 
 	double millis = (seconds-start_time)*1000.0;
 	unsigned long ret = millis;
-	printf("millis %u\r\n",ret);
+	printf("millis %lu\r\n",ret);
 	return millis;
 }
 
@@ -69,7 +69,7 @@ unsigned long millis(void){
 
 //
 void delay(unsigned long ms){
-	printf("delay=%d\r\n",ms);
+	printf("delay=%lu\r\n",ms);
 	usleep(ms*1000);
 }
 void delayMicroseconds(unsigned int us){

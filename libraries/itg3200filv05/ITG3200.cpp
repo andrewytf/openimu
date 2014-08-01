@@ -213,7 +213,7 @@ void ITG3200::zeroCalibrate(unsigned int totSamples, unsigned int sampleDelayMS)
   int xyz[3]; 
   float tmpOffsets[] = {0,0,0};
 
-  for (int i = 0;i < totSamples;i++){
+  for (unsigned int i = 0;i < totSamples;i++){
     delay(sampleDelayMS);
     readGyroRaw(xyz);
     tmpOffsets[0] += xyz[0];

@@ -332,7 +332,7 @@ void FreeIMU::getValues(float * values) {
   #endif
   
   
-  #warning Accelerometer calibration active: have you calibrated your device?
+  //#warning Accelerometer calibration active: have you calibrated your device?
   // remove offsets and scale accelerometer (calibration)
   values[0] = (values[0] - acc_off_x) / acc_scale_x;
   values[1] = (values[1] - acc_off_y) / acc_scale_y;
@@ -342,7 +342,7 @@ void FreeIMU::getValues(float * values) {
   #if HAS_HMC5883L()
     magn.getValues(&values[6]);
     // calibration 
-    #warning Magnetometer calibration active: have you calibrated your device?
+  //  #warning Magnetometer calibration active: have you calibrated your device?
     values[6] = (values[6] - magn_off_x) / magn_scale_x;
     values[7] = (values[7] - magn_off_y) / magn_scale_y;
     values[8] = (values[8] - magn_off_z) / magn_scale_z;
