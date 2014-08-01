@@ -27,15 +27,24 @@
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
+double start_time = 0;
+
 //
 unsigned long micros(void){
 	struct timeval start;
 	gettimeofday(&start, NULL);
 	double seconds = start.tv_sec + start.tv_usec/1000000.0;
-	double micros = seconds*1000000.0;
+        if(start_time==0){
+           start_time=seconds;
+	   gettimeofday(&start, NULL);
+	   seconds = start.tv_sec + start.tv_usec/1000000.0;
+        }
+
+	double micros = (seconds-start_time)*1000000.0;
+
 
 	unsigned long ret = micros;
-	printf("micros %f %ul\r\n",seconds,ret);
+	printf("micros %u\r\n",ret);
 	return micros;
 }
 
@@ -43,9 +52,15 @@ unsigned long millis(void){
 	struct timeval start;
 	gettimeofday(&start, NULL);
 	double seconds = start.tv_sec + start.tv_usec/1000000.0;
-	double millis = seconds*1000.0;
+        if(start_time==0){
+           start_time=seconds;
+	   gettimeofday(&start, NULL);
+	   seconds = start.tv_sec + start.tv_usec/1000000.0;
+        }
+
+	double millis = (seconds-start_time)*1000.0;
 	unsigned long ret = millis;
-	printf("millis %f %ul\r\n",seconds,ret);
+	printf("millis %u\r\n",ret);
 	return millis;
 }
 

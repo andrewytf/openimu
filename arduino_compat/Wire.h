@@ -29,14 +29,12 @@
 class TwoWire : public Stream
 {
   private:
-    static uint8_t rxBuffer[2048];
-    static uint8_t rxBufferIndex;
-    static uint8_t rxBufferLength;
+     uint8_t rxBuffer[2048];
+     uint8_t rxBufferIndex;
+     uint8_t rxBufferLength;
 
-    static uint8_t txAddress;
-    static uint8_t txBuffer[2048];
-    static uint8_t txBufferIndex;
-    static uint8_t txBufferLength;
+     uint8_t txAddress;
+     uint8_t txBuffer[2048];
 
     static uint8_t transmitting;
     static void (*user_onRequest)(void);
