@@ -8,9 +8,10 @@ Main objectives of this fork are:
 * Build for Stellaris Launchpad with Energia IDE 0101E0012 (03/18/2014)
 * Build for Tiva C Launchpad with Energia IDE 0101E0012 (03/18/2014)
 * Make calibration tool support Ubuntu 14.04
-* Port to Beaglebone Black (experimental)
 * Support GY-86 breakout board
-
+* Port to Beaglebone Black (experimental)
+* Port to STM32F103 with [MBED](https://mbed.org/platforms/ST-Nucleo-F103RB/)
+* Port to FRDM-KL25Z with [MBED](https://mbed.org/handbook/mbed-FRDM-KL25Z)
 
 Arduino Nano v3 and Arduino IDE 1.0.5
 -------------------------------------
