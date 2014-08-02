@@ -12,8 +12,8 @@ Main objectives of this fork are:
 * Support GY-86 breakout board
 
 
-Testing with Arduino Nano v3 and Arduino IDE 1.0.5
---------------------------------------------------
+Arduino Nano v3 and Arduino IDE 1.0.5
+-------------------------------------
 
 * Clone this repo
 * rename to sketchbook in your home directory
@@ -22,8 +22,8 @@ Testing with Arduino Nano v3 and Arduino IDE 1.0.5
 * Open Arduino IDE 
 * File->Examples->Free_IMU->FreeIMU_serial
 
-Testing with Tiva C and Energia IDE 0101E0012
----------------------------------------------
+Tiva C and Energia IDE 0101E0012
+--------------------------------
 
 * Clone this repo
 * rename to sketchbook in your home directory
@@ -32,8 +32,8 @@ Testing with Tiva C and Energia IDE 0101E0012
 * Open Energia IDE
 * File->Examples->Free_IMU->FreeIMU_serial
 
-Testing Beaglebone Black port 
------------------------------
+Beaglebone Black port 
+---------------------
 
 * [Use lastest Debian image](http://beagleboard.org/latest-images/)
 * Connect GY-86 to BBB i2c interface
