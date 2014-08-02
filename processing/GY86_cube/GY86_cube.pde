@@ -90,7 +90,7 @@ void buildBoxShape() {
 
 void drawCube() {  
   pushMatrix();
-    translate(VIEW_SIZE_X/2, VIEW_SIZE_Y/2 + 50, 0);
+    translate(VIEW_SIZE_X/2, VIEW_SIZE_Y/2 + 50 -(altimeter*100), 0);
     scale(5,5,5);
    
     rotateX(-Euler[0]);
