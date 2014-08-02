@@ -52,6 +52,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #if F_CPU == 16000000L
   #define FREEIMU_FREQ "16 MHz"
+#elif F_CPU == 80000000L
+  #define FREEIMU_FREQ "80 MHz"
 #elif F_CPU == 8000000L
   #define FREEIMU_FREQ "8 MHz"
 #endif
@@ -177,7 +179,7 @@ class FreeIMU
     void calLoad();
     #endif
     void zeroGyro();
-    void getRawValues(int * raw_values);
+    void getRawValues(int16_t * raw_values);
     void getValues(float * values);
     void getQ(float * q);
     void getEuler(float * angles);

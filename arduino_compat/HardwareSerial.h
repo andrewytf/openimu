@@ -70,7 +70,7 @@ class HardwareSerial : public Stream
     operator bool();
 
     int fd;
-    void socat_link(char*);
+    void socat_link(const char*);
 };
 
 // Define config for Serial.begin(baud, config);

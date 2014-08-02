@@ -14,7 +14,7 @@
 #include <Wire.h>
 #include <SPI.h>
 
-int raw_values[9];
+int16_t raw_values[9];
 //char str[512];
 float ypr[3]; // yaw pitch roll
 float val[9];

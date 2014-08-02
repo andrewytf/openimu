@@ -20,7 +20,7 @@
 
 
 float q[4];
-int raw_values[9];
+int16_t raw_values[9];
 float ypr[3]; // yaw pitch roll
 char str[256];
 float val[9];

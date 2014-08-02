@@ -145,11 +145,11 @@ void HMC58X3::calibrate(unsigned char gain) {
 */
 bool HMC58X3::calibrate(unsigned char gain,unsigned int n_samples) 
 {
-    int xyz[3];                     // 16 bit integer values for each axis.
-    long int xyz_total[3]={0,0,0};  // 32 bit totals so they won't overflow.
+    int16_t xyz[3];                     // 16 bit integer values for each axis.
+    int32_t xyz_total[3]={0,0,0};  // 32 bit totals so they won't overflow.
     bool bret=true;                 // Function return value.  Will return false if the wrong identifier is returned, saturation is detected or response is out of range to self test bias.
     char id[3];                     // Three identification registers should return 'H43'.
-    long int low_limit, high_limit;                                    
+    int32_t low_limit, high_limit;
     /*
         Make sure we are talking to the correct device.
         Hard to believe Honeywell didn't change the identifier.
@@ -292,7 +292,7 @@ void HMC58X3::writeReg(unsigned char reg, unsigned char val) {
 }
 
 
-void HMC58X3::getValues(int *x,int *y,int *z) {
+void HMC58X3::getValues(int16_t *x,int16_t *y,int16_t *z) {
   float fx,fy,fz;
   getValues(&fx,&fy,&fz);
   *x= (int) (fx + 0.5);
@@ -302,7 +302,7 @@ void HMC58X3::getValues(int *x,int *y,int *z) {
 
 
 void HMC58X3::getValues(float *x,float *y,float *z) {
-  int xr,yr,zr;
+  int16_t xr,yr,zr;
   
   getRaw(&xr, &yr, &zr);
   *x= ((float) xr) / x_scale;
@@ -311,7 +311,7 @@ void HMC58X3::getValues(float *x,float *y,float *z) {
 }
 
 
-void HMC58X3::getRaw(int *x,int *y,int *z) {
+void HMC58X3::getRaw(int16_t *x,int16_t *y,int16_t *z) {
   Wire.beginTransmission(HMC58X3_ADDR);
   Wire.write(HMC58X3_R_XM); // will start from DATA X MSB and fetch all the others
   Wire.endTransmission();

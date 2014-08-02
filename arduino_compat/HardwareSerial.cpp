@@ -82,7 +82,7 @@ HardwareSerial::operator bool() {
 	return true;
 }
 
-void HardwareSerial::socat_link(char* dev){
+void HardwareSerial::socat_link(const char* dev){
 	printf("serial.socat_link %s\r\n",dev);
 
       fd = open( dev, O_RDWR| O_NOCTTY );

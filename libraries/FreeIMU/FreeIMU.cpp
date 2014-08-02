@@ -267,7 +267,7 @@ void FreeIMU::calLoad() {
 /**
  * Populates raw_values with the raw_values from the sensors
 */
-void FreeIMU::getRawValues(int * raw_values) {
+void FreeIMU::getRawValues(int16_t * raw_values) {
   #if HAS_ITG3200()
     acc.readAccel(&raw_values[0], &raw_values[1], &raw_values[2]);
     gyro.readGyroRaw(&raw_values[3], &raw_values[4], &raw_values[5]);
@@ -355,7 +355,7 @@ void FreeIMU::getValues(float * values) {
 */
 void FreeIMU::zeroGyro() {
   const int totSamples = 3;
-  int raw[11];
+  int16_t raw[11];
   float tmpOffsets[] = {0,0,0};
   
   for (int i = 0; i < totSamples; i++){
@@ -372,10 +372,12 @@ void FreeIMU::zeroGyro() {
 
 
 /**
- * Quaternion implementation of the 'DCM filter' [Mayhony et al].  Incorporates the magnetic distortion
- * compensation algorithms from Sebastian Madgwick's filter which eliminates the need for a reference
- * direction of flux (bx bz) to be predefined and limits the effect of magnetic distortions to yaw
- * axis only.
+ * Quaternion implementation of the 'DCM filter' [Mayhony et al].
+ *
+ * Incorporates the magnetic distortion compensation algorithms
+ * from Sebastian Madgwick's filter which eliminates
+ * the need for a reference direction of flux (bx bz)
+ * to be predefined and limits the effect of magnetic distortions to yaw axis only.
  * 
  * @see: http://www.x-io.co.uk/node/8#open_source_ahrs_and_imu_algorithms
 */
