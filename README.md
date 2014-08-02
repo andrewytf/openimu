@@ -11,37 +11,38 @@ Main objectives of this fork are:
 * Port to Beaglebone Black (experimental)
 * Support GY-86 breakout board
 
-Install
--------
+
+Testing with Arduino Nano v3 and Arduino IDE 1.0.5
+--------------------------------------------------
+
 * Clone this repo
 * rename to sketchbook in your home directory
-
-Arduino Firmware (version 1.0.x)
---------------------------------
-
 * Connect GY-86 to Arduino Nano v3 i2c interface
 * Install Arduino IDE with "apt-get install -y arduino"
 * Open Arduino IDE 
 * File->Examples->Free_IMU->FreeIMU_serial
 
-Energia 0101E0012
------------------
+Testing with Tiva C and Energia IDE 0101E0012
+---------------------------------------------
 
+* Clone this repo
+* rename to sketchbook in your home directory
 * Connect GY-86 to Stellaris or Tiva C Launchpad i2c interface 
 * Install Energia IDE from http://energia.nu/downloads
 * Open Energia IDE
 * File->Examples->Free_IMU->FreeIMU_serial
 
-Beaglebone Black (BBB) port - Debian 7.6 / Ubuntu 14.04
--------------------------------------------------------
+Testing Beaglebone Black port 
+-----------------------------
 
+* [Use lastest Debian image](http://beagleboard.org/latest-images/)
 * Connect GY-86 to BBB i2c interface
 * clone this repo
 * make
 
 
-FreeIMU_GUI required packages (Ubuntu 14.04)
---------------------------------------------
+Calibration tool
+----------------
 
 * sensors calibration is mandatory 
 * connect Arduino/Tiva C/Stellaris/Beaglebone serial port to PC
