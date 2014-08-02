@@ -51,6 +51,7 @@ Required calibration tool
 * cd FreeIMU_GUI
 * make run
 
+<iframe width="560" height="315" src="//www.youtube.com/embed/rlGxA3Hqn4Q" frameborder="0" allowfullscreen></iframe>
 
 Processing testing and validation tool 
 --------------------------------------
@@ -63,6 +64,8 @@ Processing testing and validation tool
 * wget http://download.processing.org/processing-2.2.1-macosx.zip
 * Open Processing
 * File->Sketchbook->proccessing->FreeIMU_cube
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/zizJOUMH_vE" frameborder="0" allowfullscreen></iframe>
 
 Hardware project
 ----------------
