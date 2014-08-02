@@ -32,7 +32,7 @@ import processing.opengl.*;
 
 Serial myPort;  // Create object from Serial class
 
-final String serialPort = "/dev/ttyUSB0"; // replace this with your serial port. On windows you will need something like "COM1".
+final String serialPort = "/dev/vmodem"; // replace this with your serial port. On windows you will need something like "COM1".
 
 float [] q = new float [4];
 float [] hq = null;
@@ -64,14 +64,20 @@ void setup()
   println("Waiting IMU..");
   
   myPort.clear();
-  
-  while (myPort.available() == 0) {
-    myPort.write("v");
-    myDelay(1000);
-  }
-  println(myPort.readStringUntil('\n'));
-  myPort.write("q" + char(burst));
-  myPort.bufferUntil('\n');
+
+  // send command until receive response
+  //while (myPort.available() == 0) {
+    // send comand
+   // myPort.write("v");
+    // wait 1s
+  //  myDelay(1000);
+  //}
+  // wait for \n
+  //println(myPort.readStringUntil('\n'));
+  // send comand
+ // myPort.write("q" + char(burst));
+  // wait for \n
+  //myPort.bufferUntil('\n');
 }
 
 
@@ -90,24 +96,23 @@ float decodeFloat(String inString) {
 }
 
 void serialEvent(Serial p) {
-  if(p.available() >= 18) {
+  //if(p.available() >= 10) {
     String inputString = p.readStringUntil('\n');
     //print(inputString);
     if (inputString != null && inputString.length() > 0) {
-      String [] inputStringArr = split(inputString, ",");
-      if(inputStringArr.length >= 5) { // q1,q2,q3,q4,\r\n so we have 5 elements
-        q[0] = decodeFloat(inputStringArr[0]);
-        q[1] = decodeFloat(inputStringArr[1]);
-        q[2] = decodeFloat(inputStringArr[2]);
-        q[3] = decodeFloat(inputStringArr[3]);
+      String [] inputStringArr = split(inputString, "|");
+      if(inputStringArr.length >= 3) {
+        Euler[0]=Float.parseFloat(inputStringArr[0]);
+        Euler[1]=Float.parseFloat(inputStringArr[1]);
+        Euler[2]=Float.parseFloat(inputStringArr[2]);
       }
     }
-    count = count + 1;
-    if(burst == count) { // ask more data when burst completed
-      p.write("q" + char(burst));
-      count = 0;
-    }
-  }
+    //count = count + 1;
+    //if(burst == count) { // ask more data when burst completed
+    //  p.write("q" + char(burst));
+    //  count = 0;
+    //}
+  //}
 }
 
 
@@ -183,7 +188,8 @@ void drawCube() {
 void draw() {
   background(#000000);
   fill(#ffffff);
-  
+
+/*  
   if(hq != null) { // use home quaternion
     quaternionToEuler(quatProd(hq, q), Euler);
     text("Disable home position by pressing \"n\"", 20, VIEW_SIZE_Y - 30);
@@ -192,6 +198,7 @@ void draw() {
     quaternionToEuler(q, Euler);
     text("Point FreeIMU's X axis to your monitor then press \"h\"", 20, VIEW_SIZE_Y - 30);
   }
+  */
   
   textFont(font, 20);
   textAlign(LEFT, TOP);
