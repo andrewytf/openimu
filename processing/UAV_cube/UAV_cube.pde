@@ -1,31 +1,3 @@
-/**
-Visualize a cube which will assumes the orientation described
-in a quaternion coming from the serial port.
-
-INSTRUCTIONS: 
-This program has to be run when you have the FreeIMU_serial
-program running on your Arduino and the Arduino connected to your PC.
-Remember to set the serialPort variable below to point to the name the
-Arduino serial port has in your system. You can get the port using the
-Arduino IDE from Tools->Serial Port: the selected entry is what you have
-to use as serialPort variable.
-
-
-Copyright (C) 2011-2012 Fabio Varesano - http://www.varesano.net/
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the version 3 GNU General Public License as
-published by the Free Software Foundation.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-*/
 
 import processing.serial.*;
 import processing.opengl.*;
