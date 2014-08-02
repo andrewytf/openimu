@@ -43,11 +43,13 @@ Beaglebone Black (BBB) port - Debian 7.6 / Ubuntu 14.04
 FreeIMU_GUI required packages (Ubuntu 14.04)
 --------------------------------------------
 
-Required calibration tool
-
+* sensors calibration is mandatory 
+* connect Arduino/Tiva C/Stellaris/Beaglebone serial port to PC
+* Install all required libraries
 * apt-get install -y python-qt4 python-qt4-gl python-opengl pyqt4-dev-tools python-scipy
 * wget http://www.pyqtgraph.org/downloads/python-pyqtgraph_0.9.8-1_all.deb
 * dpkg -i python-pyqtgraph_0.9.8-1_all.deb
+* Open FreeIMU_GUI 
 * cd FreeIMU_GUI
 * make run
 * Youtube Demo
@@ -57,6 +59,7 @@ Required calibration tool
 Processing testing and validation tool 
 --------------------------------------
 
+* board must be calibrated using FreeIMU_GUI before testing
 * Download processing 2.2.1 
 * wget http://download.processing.org/processing-2.2.1-windows32.zip
 * wget http://download.processing.org/processing-2.2.1-windows64.zip
