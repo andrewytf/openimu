@@ -91,7 +91,7 @@ void buildBoxShape() {
 
 void drawCube() {  
   pushMatrix();
-    translate(VIEW_SIZE_X/2 - position[0], VIEW_SIZE_Y/2 + position[2], position[1]);
+    translate(VIEW_SIZE_X/2 - position[0], VIEW_SIZE_Y/2 + position[2], -position[1]);
     scale(5,5,5);
    
    //x=x
@@ -112,7 +112,7 @@ void draw() {
   fill(#ffffff);
   textFont(font, 20);
   textAlign(LEFT, TOP);
-  text(title+"\nPitch (degrees): " + degrees(Euler[0]) + "\nRoll (degrees): " + degrees(Euler[1])+"\nYaw (degrees): " + degrees(Euler[2])+ "\nPosition X (cm): "+position[0]+ "\nPosition Y (cm): "+position[1]+ "\nPosition Z (cm): "+position[2], 20, 20);
+  text(title+"\nPitch (degrees): " + degrees(Euler[0]) + "\nRoll (degrees): " + degrees(Euler[1])+"\nYaw (degrees): " + degrees(Euler[2])+ "\nFront/Rear (cm): "+position[0]+ "\nLeft/Right (cm): "+position[1]+ "\nAltimeter (cm): "+position[2], 20, 20);
   drawCube();
 }
 
