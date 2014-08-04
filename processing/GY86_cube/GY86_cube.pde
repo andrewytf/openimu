@@ -23,6 +23,7 @@ void setup()
 void serialEvent(Serial p) {
    
     String inputString = p.readStringUntil('\r');
+    println(inputString);
     if (inputString != null && inputString.length() > 0) {
       //println(inputString);
       String [] inputStringArr = split(inputString, "|");
