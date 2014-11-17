@@ -80,6 +80,37 @@ Hardware project
 * apt-get install -y kicad
 
 
+Windows Dev setup
+-----------------
+
+#python
+
+https://www.python.org/ftp/python/2.7.8/python-2.7.8.amd64.msi
+
+#numpy
+
+http://www.lfd.uci.edu/~gohlke/pythonlibs/wyxyx8e9/numpy-MKL-1.9.1.win-amd64-py2.7.exe
+
+#scipy
+
+http://www.lfd.uci.edu/~gohlke/pythonlibs/wyxyx8e9/scipy-0.14.0.win-amd64-py2.7.exe
+
+#pyqt4
+
+http://ufpr.dl.sourceforge.net/project/pyqt/PyQt4/PyQt-4.11.3/PyQt4-4.11.3-gpl-Py2.7-Qt4.8.6-x64.exe
+
+#pyqtgraph
+
+http://www.pyqtgraph.org/downloads/pyqtgraph-0.9.8.win-amd64.exe
+
+#pyopengl
+
+https://pypi.python.org/packages/any/P/PyOpenGL/PyOpenGL-3.0.2.win-amd64.exe#md5=b02e6a5e7b547e0968c34a2a43de7da1
+
+#pyserial
+
+http://www.lfd.uci.edu/~gohlke/pythonlibs/wyxyx8e9/pyserial-2.7.win-amd64-py2.7.exe
+
 
 
 
